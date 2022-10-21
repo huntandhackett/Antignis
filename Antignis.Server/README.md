@@ -218,6 +218,8 @@ When a new policy is created, Antignis will create bypass groups per policy that
 
 This way, access to services that only specific people in an organization use (such as MSSQL) can be restricted to only the relevant people instead opening the port to the entire organization.
 
+### I created a baseline or a policy, but the policy is not applied?
+Antignis will create the GPO for you, but will not link the GPO to any Organizational Unit. This must be done manually.
 
 # Technical references
 
