@@ -1,4 +1,16 @@
 
+       ,_     _,            _____          __  .__              .__
+         '._.'             /  _  \   _____/  |_|__| ____   ____ |__| ______
+    '-,   (_)   ,-'       /  /_\  \ /    \   __\  |/ ___\ /    \|  |/  ___/
+      '._ .:. _.'        /    |    \   |  \  | |  / /_/  >   |  \  |\___ \
+       _ '|Y|' _         \____|__  /___|  /__| |__\___  /|___|  /__/____  >
+     ,` `>\ /<` `,               \/     \/       /_____/      \/        \/
+    ` ,-`  I  `-, `
+      |   /=\   |        
+    ,-'   |=|   '-,      
+          )-(
+          \_/
+
 
 # Usage
 ```
@@ -189,7 +201,7 @@ The policy will not be applied to any organizational unit, this must be done man
 ### Bypass rule not working
 To bypass a block rule, a Connection Security Rule must be created on both source and destination computer. This tells both computers that a connection to a specific port must be established over IPSEC. If both source and destination computers are in the same policy, this will be configured automatically.
 
-However, if the host that initiates the connection is not in the same policy or does not have any Connection Security Rules (CSR)configured, this must be done manually. In a future release, this will be configured automatically as well. For now, the easiest way to do this, is by using a bastion host or default server to connect from and configure a new CSR. 
+However, if the host that initiates the connection is not in the same policy or does not have any Connection Security Rules (CSR) configured, this must be done manually. In a future release, this will be configured automatically as well. For now, the easiest way to do this, is by using a bastion host or default server to connect from and configure a new CSR. 
 1. Go to the Windows Firewall with Advanced Features
 2. Go to `Connection Security Rules` and create a `New Rule`
 3. Choose `Custom` rule type and click Next
