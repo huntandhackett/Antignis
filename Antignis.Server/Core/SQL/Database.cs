@@ -37,12 +37,6 @@ namespace Antignis.Server.Core.SQL
         /// </summary>
         private SQLiteConnection conn { get; set; }
 
-        private readonly Dictionary<string, int> computers = new Dictionary<string, int>();
-        private readonly Dictionary<string, int> shares = new Dictionary<string, int>();
-        private readonly Dictionary<string, int> roles = new Dictionary<string, int>();
-        private readonly Dictionary<string, int> neighbors = new Dictionary<string, int>();
-        private readonly Dictionary<int, int> ports = new Dictionary<int, int>();
-
         #endregion
 
         #region public methods
@@ -69,85 +63,6 @@ namespace Antignis.Server.Core.SQL
             Init();
 
             IsConnected = true;
-        }
-
-        /// <summary>
-        /// Runs query on the database and returns list with string from first column
-        /// </summary>
-        /// <param name="query"></param>
-        /// <returns></returns>
-        public List<string> QueryDatabase(string query, string[] paramNames, object[] paramValues)
-        {
-            List<string> result = new List<string>();
-
-            if (conn.State != System.Data.ConnectionState.Open)
-                conn.Open();
-
-            SQLiteCommand sqlCommand = new SQLiteCommand();
-            sqlCommand.Connection = conn;
-            sqlCommand.CommandText = query;
-
-            // Add parameters
-            for (int i = 0; i < paramNames.Length; i++)
-                sqlCommand.Parameters.AddWithValue(paramNames[i], paramValues[i]);
-
-            DataSet dSet = new DataSet();
-            SQLiteDataAdapter adapter = new SQLiteDataAdapter(sqlCommand);
-            adapter.Fill(dSet);
-
-            if (adapter != null)
-                adapter.Dispose();
-
-            if (sqlCommand != null)
-                sqlCommand.Dispose();
-
-            if (dSet.Tables[0].Rows.Count > 0)
-            {
-                foreach (System.Data.DataRow r in dSet.Tables[0].Rows)
-                {
-                    result.Add(r.ItemArray[0].ToString());
-                }
-            }
-
-            return result;
-        }
-
-        /// <summary>
-        /// Runs query on the database and returns list with string from first column
-        /// </summary>
-        /// <param name="query"></param>
-        /// <returns></returns>
-        public List<string> QueryDatabase(string query)
-        {
-            List<string> result = new List<string>();
-
-            if (conn.State != System.Data.ConnectionState.Open)
-                conn.Open();
-
-            SQLiteCommand sqlCommand = new SQLiteCommand();
-            sqlCommand.Connection = conn;
-            sqlCommand.CommandText = query;
-
-            DataSet dSet = new DataSet();
-            SQLiteDataAdapter adapter = new SQLiteDataAdapter(sqlCommand);
-            adapter.Fill(dSet);
-
-            if (adapter != null)
-                adapter.Dispose();
-
-            if (sqlCommand != null)
-                sqlCommand.Dispose();
-
-            if (dSet.Tables[0].Rows.Count > 0)
-            {
-                foreach (System.Data.DataRow r in dSet.Tables[0].Rows)
-                {
-                    result.Add(r.ItemArray[0].ToString());
-                }
-            }
-
-
-            return result;
         }
 
         /// <summary>
@@ -524,72 +439,7 @@ namespace Antignis.Server.Core.SQL
 
         #endregion
 
-
-
         #region private methods
-
-        /// <summary>
-        /// Starts a new transaction on the database
-        /// </summary>
-        private void StartTransaction()
-        {
-            if (conn.State != System.Data.ConnectionState.Open)
-                conn.Open();
-
-            // Tweak the sqlite database to increase performance
-            EnableDatabaseTweaks();
-
-            transaction = conn.BeginTransaction();
-            IsTransaction = true;
-        }
-
-        /// <summary>
-        /// Commits transaction to the sqlite database
-        /// </summary>
-        private void EndTransaction()
-        {
-            if (conn.State != System.Data.ConnectionState.Open)
-                conn.Open();
-
-            transaction.Commit();
-            IsTransaction = false;
-
-            // Tweak the sqlite database to increase performance
-            DisableDatabaseTweaks();
-        }
-
-        /// <summary>
-        /// Tweak database to enhance performance. 
-        /// Since the data is not mission critical, datacorruption 
-        /// because of power outtage does not outweigh the performance increase. This means that some PRAGMA settings
-        /// can be risky.
-        /// </summary>
-        private void EnableDatabaseTweaks()
-        {
-            // Keep journal logs in memory. 
-            ExecuteNonQuery("PRAGMA JOURNAL_MODE=MEMORY;");
-
-            // Use RAM as temp storage
-            ExecuteNonQuery("PRAGMA TEMP_STORE=MEMORY;");
-
-            // No synchronous journal rollback
-            ExecuteNonQuery("PRAGMA SYNCHRONOUS=OFF;");
-
-            // Set database in exclusive mode
-            ExecuteNonQuery("PRAGMA LOCKING_MODE=EXCLUSIVE;");
-        }
-
-        /// <summary>
-        /// Disables tweaks to enhance database performance
-        /// </summary>
-        private void DisableDatabaseTweaks()
-        {
-
-            ExecuteNonQuery("PRAGMA JOURNAL_MODE=DELETE;");
-            ExecuteNonQuery("PRAGMA TEMP_STORE=DEFAULT;");
-            ExecuteNonQuery("PRAGMA SYNCHRONOUS=FULL;");
-            ExecuteNonQuery("PRAGMA LOCKING_MODE=NORMAL;");
-        }
 
         /// <summary>
         /// Initializes the database
@@ -643,33 +493,6 @@ namespace Antignis.Server.Core.SQL
                 sqlCommand.Transaction = transaction;
 
             sqlCommand.CommandText = query;
-            int result = sqlCommand.ExecuteNonQuery();
-
-            if (sqlCommand != null)
-                sqlCommand.Dispose();
-        }
-
-        /// <summary>
-        /// Run query against database
-        /// </summary>
-        /// <param name="query"></param>
-        /// <param name="paramNames"></param>
-        /// <param name="paramValues"></param>
-        private void ExecuteNonQuery(string query, string[] paramNames, object[] paramValues)
-        {
-            SQLiteCommand sqlCommand = new SQLiteCommand();
-            sqlCommand.Connection = conn;
-
-            if (conn.State != System.Data.ConnectionState.Open)
-                conn.Open();
-
-            if (IsTransaction)
-                sqlCommand.Transaction = transaction;
-
-            sqlCommand.CommandText = query;
-            for (int i = 0; i < paramNames.Length; i++)
-                sqlCommand.Parameters.AddWithValue(paramNames[i], paramValues[i]);
-
             int result = sqlCommand.ExecuteNonQuery();
 
             if (sqlCommand != null)
