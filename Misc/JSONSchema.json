@@ -1,0 +1,732 @@
+{
+    "$schema": "https://json-schema.org/draft/2019-09/schema",
+    "$id": "http://example.com/example.json",
+    "type": "object",
+    "default": {},
+    "title": "Root Schema",
+    "required": [
+        "IsServerOS",
+        "WindowsFirewallSettingId",
+        "Id",
+        "FileShare",
+        "TCPConnection",
+        "WindowsFirewallRule",
+        "Port",
+        "Program",
+        "Role",
+        "WindowsFirewallSetting",
+        "NetworkMask",
+        "IPAddress",
+        "DNSHostname",
+        "OperatingSystem"
+    ],
+    "properties": {
+        "IsServerOS": {
+            "type": "boolean",
+            "default": false,
+            "title": "The IsServerOS Schema",
+            "examples": [
+                false
+            ]
+        },
+        "WindowsFirewallSettingId": {
+            "type": "integer",
+            "default": 0,
+            "title": "The WindowsFirewallSettingId Schema",
+            "examples": [
+                0
+            ]
+        },
+        "Id": {
+            "type": "integer",
+            "default": 0,
+            "title": "The Id Schema",
+            "examples": [
+                0
+            ]
+        },
+        "FileShare": {
+            "type": "array",
+            "default": [],
+            "title": "The FileShare Schema",
+            "items": {
+                "type": "object",
+                "title": "A Schema",
+                "required": [
+                    "HostId",
+                    "Id",
+                    "Host",
+                    "Name"
+                ],
+                "properties": {
+                    "HostId": {
+                        "type": "integer",
+                        "title": "The HostId Schema",
+                        "examples": [
+                            0
+                        ]
+                    },
+                    "Id": {
+                        "type": "integer",
+                        "title": "The Id Schema",
+                        "examples": [
+                            0
+                        ]
+                    },
+                    "Host": {
+                        "type": "null",
+                        "title": "The Host Schema",
+                        "examples": [
+                            null
+                        ]
+                    },
+                    "Name": {
+                        "type": "string",
+                        "title": "The Name Schema",
+                        "examples": [
+                            "Conf",
+                            "tmp"
+                        ]
+                    }
+                },
+                "examples": [{
+                    "HostId": 0,
+                    "Id": 0,
+                    "Host": null,
+                    "Name": "tmp"
+                }]
+            },
+            "examples": [
+                [{
+                    "HostId": 0,
+                    "Id": 0,
+                    "Host": null,
+                    "Name": "tmp"
+                }]
+            ]
+        },
+        "TCPConnection": {
+            "type": "array",
+            "default": [],
+            "title": "The TCPConnection Schema",
+            "items": {
+                "type": "object",
+                "title": "A Schema",
+                "required": [
+                    "RemotePort",
+                    "LocalPort",
+                    "HostId",
+                    "Id",
+                    "Host",
+                    "RemoteIPAddress",
+                    "LocalIPAddress",
+                    "Direction"
+                ],
+                "properties": {
+                    "RemotePort": {
+                        "type": "integer",
+                        "title": "The RemotePort Schema",
+                        "examples": [
+                            445
+                        ]
+                    },
+                    "LocalPort": {
+                        "type": "integer",
+                        "title": "The LocalPort Schema",
+                        "examples": [
+                            51509,
+                            51513,
+                            51667,
+                            51708
+                        ]
+                    },
+                    "HostId": {
+                        "type": "integer",
+                        "title": "The HostId Schema",
+                        "examples": [
+                            0
+                        ]
+                    },
+                    "Id": {
+                        "type": "integer",
+                        "title": "The Id Schema",
+                        "examples": [
+                            0
+                        ]
+                    },
+                    "Host": {
+                        "type": "null",
+                        "title": "The Host Schema",
+                        "examples": [
+                            null
+                        ]
+                    },
+                    "RemoteIPAddress": {
+                        "type": "string",
+                        "title": "The RemoteIPAddress Schema",
+                        "examples": [
+                            "192.168.88.132"
+                        ]
+                    },
+                    "LocalIPAddress": {
+                        "type": "string",
+                        "title": "The LocalIPAddress Schema",
+                        "examples": [
+                            "192.168.88.128"
+                        ]
+                    },
+                    "Direction": {
+                        "type": "string",
+                        "title": "The Direction Schema",
+                        "examples": [
+                            "Outbound"
+                        ]
+                    }
+                },
+                "examples": [{
+                    "RemotePort": 445,
+                    "LocalPort": 51509,
+                    "HostId": 0,
+                    "Id": 0,
+                    "Host": null,
+                    "RemoteIPAddress": "192.168.88.132",
+                    "LocalIPAddress": "192.168.88.128",
+                    "Direction": "Outbound"
+                },
+                {
+                    "RemotePort": 445,
+                    "LocalPort": 51513,
+                    "HostId": 0,
+                    "Id": 0,
+                    "Host": null,
+                    "RemoteIPAddress": "192.168.88.132",
+                    "LocalIPAddress": "192.168.88.128",
+                    "Direction": "Outbound"
+                },
+                {
+                    "RemotePort": 445,
+                    "LocalPort": 51667,
+                    "HostId": 0,
+                    "Id": 0,
+                    "Host": null,
+                    "RemoteIPAddress": "192.168.88.132",
+                    "LocalIPAddress": "192.168.88.128",
+                    "Direction": "Outbound"
+                },
+                {
+                    "RemotePort": 445,
+                    "LocalPort": 51708,
+                    "HostId": 0,
+                    "Id": 0,
+                    "Host": null,
+                    "RemoteIPAddress": "192.168.88.132",
+                    "LocalIPAddress": "192.168.88.128",
+                    "Direction": "Outbound"
+                }]
+            },
+            "examples": [
+                [{
+                    "RemotePort": 445,
+                    "LocalPort": 51509,
+                    "HostId": 0,
+                    "Id": 0,
+                    "Host": null,
+                    "RemoteIPAddress": "192.168.88.132",
+                    "LocalIPAddress": "192.168.88.128",
+                    "Direction": "Outbound"
+                },
+                {
+                    "RemotePort": 445,
+                    "LocalPort": 51513,
+                    "HostId": 0,
+                    "Id": 0,
+                    "Host": null,
+                    "RemoteIPAddress": "192.168.88.132",
+                    "LocalIPAddress": "192.168.88.128",
+                    "Direction": "Outbound"
+                },
+                {
+                    "RemotePort": 445,
+                    "LocalPort": 51667,
+                    "HostId": 0,
+                    "Id": 0,
+                    "Host": null,
+                    "RemoteIPAddress": "192.168.88.132",
+                    "LocalIPAddress": "192.168.88.128",
+                    "Direction": "Outbound"
+                },
+                {
+                    "RemotePort": 445,
+                    "LocalPort": 51708,
+                    "HostId": 0,
+                    "Id": 0,
+                    "Host": null,
+                    "RemoteIPAddress": "192.168.88.132",
+                    "LocalIPAddress": "192.168.88.128",
+                    "Direction": "Outbound"
+                }]
+            ]
+        },
+        "WindowsFirewallRule": {
+            "type": "array",
+            "default": [],
+            "title": "The WindowsFirewallRule Schema",
+            "items": {
+                "type": "object",
+                "title": "A Schema",
+                "required": [
+                    "RuleEnabled",
+                    "HostId",
+                    "Id",
+                    "Host",
+                    "Profiles",
+                    "Interfaces",
+                    "Action",
+                    "RemoteAddresses",
+                    "LocalPorts",
+                    "Name"
+                ],
+                "properties": {
+                    "RuleEnabled": {
+                        "type": "boolean",
+                        "title": "The RuleEnabled Schema",
+                        "examples": [
+                            true
+                        ]
+                    },
+                    "HostId": {
+                        "type": "integer",
+                        "title": "The HostId Schema",
+                        "examples": [
+                            0
+                        ]
+                    },
+                    "Id": {
+                        "type": "integer",
+                        "title": "The Id Schema",
+                        "examples": [
+                            0
+                        ]
+                    },
+                    "Host": {
+                        "type": "null",
+                        "title": "The Host Schema",
+                        "examples": [
+                            null
+                        ]
+                    },
+                    "Profiles": {
+                        "type": "string",
+                        "title": "The Profiles Schema",
+                        "examples": [
+                            "NET_FW_PROFILE2_ALL",
+                            "3",
+                            "NET_FW_PROFILE2_DOMAIN",
+                            "NET_FW_PROFILE2_PUBLIC"
+                        ]
+                    },
+                    "Interfaces": {
+                        "type": "null",
+                        "title": "The Interfaces Schema",
+                        "examples": [
+                            null
+                        ]
+                    },
+                    "Action": {
+                        "type": "string",
+                        "title": "The Action Schema",
+                        "examples": [
+                            "NET_FW_ACTION_ALLOW"
+                        ]
+                    },
+                    "RemoteAddresses": {
+                        "type": "string",
+                        "title": "The RemoteAddresses Schema",
+                        "examples": [
+                            "*"
+                        ]
+                    },
+                    "LocalPorts": {
+                        "type": "string",
+                        "title": "The LocalPorts Schema",
+                        "examples": [
+                            "445",
+                            "135",
+                            "3389",
+                            "5985",
+                            "139",
+                            "*"
+                        ]
+                    },
+                    "Name": {
+                        "type": "string",
+                        "title": "The Name Schema",
+                        "examples": [
+                            "DFS Management (SMB-In)",
+                            "RCE allow",
+                            "File and Printer Sharing (NB-Session-In)",
+                            "Network Discovery for Teredo (UPnP-In)"
+                        ]
+                    }
+                },
+                "examples": [{
+                    "RuleEnabled": true,
+                    "HostId": 0,
+                    "Id": 0,
+                    "Host": null,
+                    "Profiles": "NET_FW_PROFILE2_ALL",
+                    "Interfaces": null,
+                    "Action": "NET_FW_ACTION_ALLOW",
+                    "RemoteAddresses": "*",
+                    "LocalPorts": "445",
+                    "Name": "DFS Management (SMB-In)"
+                },
+                {
+                    "RuleEnabled": true,
+                    "HostId": 0,
+                    "Id": 0,
+                    "Host": null,
+                    "Profiles": "3",
+                    "Interfaces": null,
+                    "Action": "NET_FW_ACTION_ALLOW",
+                    "RemoteAddresses": "*",
+                    "LocalPorts": "135",
+                    "Name": "RCE allow"
+                },
+                {
+                    "RuleEnabled": true,
+                    "HostId": 0,
+                    "Id": 0,
+                    "Host": null,
+                    "Profiles": "3",
+                    "Interfaces": null,
+                    "Action": "NET_FW_ACTION_ALLOW",
+                    "RemoteAddresses": "*",
+                    "LocalPorts": "3389",
+                    "Name": "RCE allow"
+                },
+                {
+                    "RuleEnabled": true,
+                    "HostId": 0,
+                    "Id": 0,
+                    "Host": null,
+                    "Profiles": "3",
+                    "Interfaces": null,
+                    "Action": "NET_FW_ACTION_ALLOW",
+                    "RemoteAddresses": "*",
+                    "LocalPorts": "5985",
+                    "Name": "RCE allow"
+                },
+                {
+                    "RuleEnabled": true,
+                    "HostId": 0,
+                    "Id": 0,
+                    "Host": null,
+                    "Profiles": "NET_FW_PROFILE2_DOMAIN",
+                    "Interfaces": null,
+                    "Action": "NET_FW_ACTION_ALLOW",
+                    "RemoteAddresses": "*",
+                    "LocalPorts": "139",
+                    "Name": "File and Printer Sharing (NB-Session-In)"
+                },
+                {
+                    "RuleEnabled": true,
+                    "HostId": 0,
+                    "Id": 0,
+                    "Host": null,
+                    "Profiles": "NET_FW_PROFILE2_PUBLIC",
+                    "Interfaces": null,
+                    "Action": "NET_FW_ACTION_ALLOW",
+                    "RemoteAddresses": "*",
+                    "LocalPorts": "*",
+                    "Name": "Network Discovery for Teredo (UPnP-In)"
+                }]
+            },
+            "examples": [
+                [{
+                    "RuleEnabled": true,
+                    "HostId": 0,
+                    "Id": 0,
+                    "Host": null,
+                    "Profiles": "NET_FW_PROFILE2_ALL",
+                    "Interfaces": null,
+                    "Action": "NET_FW_ACTION_ALLOW",
+                    "RemoteAddresses": "*",
+                    "LocalPorts": "445",
+                    "Name": "DFS Management (SMB-In)"
+                },
+                {
+                    "RuleEnabled": true,
+                    "HostId": 0,
+                    "Id": 0,
+                    "Host": null,
+                    "Profiles": "NET_FW_PROFILE2_DOMAIN",
+                    "Interfaces": null,
+                    "Action": "NET_FW_ACTION_ALLOW",
+                    "RemoteAddresses": "*",
+                    "LocalPorts": "139",
+                    "Name": "File and Printer Sharing (NB-Session-In)"
+                }]
+            ]
+        },
+        "Port": {
+            "type": "array",
+            "default": [],
+            "title": "The Port Schema",
+            "items": {
+                "type": "object",
+                "title": "A Schema",
+                "required": [
+                    "PortNumber",
+                    "HostId",
+                    "Id",
+                    "Host"
+                ],
+                "properties": {
+                    "PortNumber": {
+                        "type": "integer",
+                        "title": "The PortNumber Schema",
+                        "examples": [
+                            135,
+                            445,
+                            139
+                        ]
+                    },
+                    "HostId": {
+                        "type": "integer",
+                        "title": "The HostId Schema",
+                        "examples": [
+                            0
+                        ]
+                    },
+                    "Id": {
+                        "type": "integer",
+                        "title": "The Id Schema",
+                        "examples": [
+                            0
+                        ]
+                    },
+                    "Host": {
+                        "type": "null",
+                        "title": "The Host Schema",
+                        "examples": [
+                            null
+                        ]
+                    }
+                },
+                "examples": [{
+                    "PortNumber": 135,
+                    "HostId": 0,
+                    "Id": 0,
+                    "Host": null
+                },
+                {
+                    "PortNumber": 445,
+                    "HostId": 0,
+                    "Id": 0,
+                    "Host": null
+                },
+                {
+                    "PortNumber": 139,
+                    "HostId": 0,
+                    "Id": 0,
+                    "Host": null
+                }]
+            },
+            "examples": [
+                [{
+                    "PortNumber": 135,
+                    "HostId": 0,
+                    "Id": 0,
+                    "Host": null
+                },
+                {
+                    "PortNumber": 445,
+                    "HostId": 0,
+                    "Id": 0,
+                    "Host": null
+                },
+                {
+                    "PortNumber": 139,
+                    "HostId": 0,
+                    "Id": 0,
+                    "Host": null
+                }]
+            ]
+        },
+        "Program": {
+            "type": "array",
+            "default": [],
+            "title": "The Program Schema",
+            "items": {
+                "type": "object",
+                "title": "A Schema",
+                "required": [
+                    "HostId",
+                    "Id",
+                    "Host",
+                    "Name"
+                ],
+                "properties": {
+                    "HostId": {
+                        "type": "integer",
+                        "title": "The HostId Schema",
+                        "examples": [
+                            0
+                        ]
+                    },
+                    "Id": {
+                        "type": "integer",
+                        "title": "The Id Schema",
+                        "examples": [
+                            0
+                        ]
+                    },
+                    "Host": {
+                        "type": "null",
+                        "title": "The Host Schema",
+                        "examples": [
+                            null
+                        ]
+                    },
+                    "Name": {
+                        "type": "string",
+                        "title": "The Name Schema",
+                        "examples": [
+                            "Microsoft Edge"
+                        ]
+                    }
+                }
+            },
+            "examples": [
+                [{
+                    "HostId": 0,
+                    "Id": 0,
+                    "Host": null,
+                    "Name": "Microsoft Edge"
+                }]
+            ]
+        },
+        "Role": {
+            "type": "null",
+            "default": null,
+            "title": "The Role Schema",
+            "examples": [
+                null
+            ]
+        },
+        "WindowsFirewallSetting": {
+            "type": "object",
+            "default": {},
+            "title": "The WindowsFirewallSetting Schema",
+            "required": [
+                "DomainProfileEnabled",
+                "PublicProfileEnabled",
+                "PrivateProfileEnabled",
+                "Id",
+                "DomainProfileDefaultBlockAction",
+                "PublicProfileDefaultBlockAction",
+                "PrivateProfileDefaultBlockAction"
+            ],
+            "properties": {
+                "DomainProfileEnabled": {
+                    "type": "boolean",
+                    "default": false,
+                    "title": "The DomainProfileEnabled Schema",
+                    "examples": [
+                        true
+                    ]
+                },
+                "PublicProfileEnabled": {
+                    "type": "boolean",
+                    "default": false,
+                    "title": "The PublicProfileEnabled Schema",
+                    "examples": [
+                        true
+                    ]
+                },
+                "PrivateProfileEnabled": {
+                    "type": "boolean",
+                    "default": false,
+                    "title": "The PrivateProfileEnabled Schema",
+                    "examples": [
+                        true
+                    ]
+                },
+                "Id": {
+                    "type": "integer",
+                    "default": 0,
+                    "title": "The Id Schema",
+                    "examples": [
+                        0
+                    ]
+                },
+                "DomainProfileDefaultBlockAction": {
+                    "type": "string",
+                    "default": "",
+                    "title": "The DomainProfileDefaultBlockAction Schema",
+                    "examples": [
+                        "NET_FW_ACTION_BLOCK"
+                    ]
+                },
+                "PublicProfileDefaultBlockAction": {
+                    "type": "string",
+                    "default": "",
+                    "title": "The PublicProfileDefaultBlockAction Schema",
+                    "examples": [
+                        "NET_FW_ACTION_BLOCK"
+                    ]
+                },
+                "PrivateProfileDefaultBlockAction": {
+                    "type": "string",
+                    "default": "",
+                    "title": "The PrivateProfileDefaultBlockAction Schema",
+                    "examples": [
+                        "NET_FW_ACTION_BLOCK"
+                    ]
+                }
+            },
+            "examples": [{
+                "DomainProfileEnabled": true,
+                "PublicProfileEnabled": true,
+                "PrivateProfileEnabled": true,
+                "Id": 0,
+                "DomainProfileDefaultBlockAction": "NET_FW_ACTION_BLOCK",
+                "PublicProfileDefaultBlockAction": "NET_FW_ACTION_BLOCK",
+                "PrivateProfileDefaultBlockAction": "NET_FW_ACTION_BLOCK"
+            }]
+        },
+        "NetworkMask": {
+            "type": "string",
+            "default": "",
+            "title": "The NetworkMask Schema",
+            "examples": [
+                "255.255.255.0"
+            ]
+        },
+        "IPAddress": {
+            "type": "string",
+            "default": "",
+            "title": "The IPAddress Schema",
+            "examples": [
+                "192.168.88.128"
+            ]
+        },
+        "DNSHostname": {
+            "type": "string",
+            "default": "",
+            "title": "The DNSHostname Schema",
+            "examples": [
+                "VM01.rebel.local"
+            ]
+        },
+        "OperatingSystem": {
+            "type": "string",
+            "default": "",
+            "title": "The OperatingSystem Schema",
+            "examples": [
+                "Windows 10 Enterprise"
+            ]
+        }
+    }
+}

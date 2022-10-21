@@ -48,7 +48,14 @@ namespace Antignis.Server.Core.Data
                 DirectorySecurity dirACL = dirInfo.GetAccessControl();
                 dirACL.SetAccessRuleProtection(true, false);
                 dirACL.AddAccessRule(new FileSystemAccessRule(domainAdminGroup, FileSystemRights.FullControl, AccessControlType.Allow));
+
+                // Make sure the user can write files
                 dirACL.AddAccessRule(new FileSystemAccessRule(authenticatedUser, FileSystemRights.CreateFiles, AccessControlType.Allow));
+
+                // Make sure that users can read permissions to restore the ACL
+                dirACL.AddAccessRule(new FileSystemAccessRule(authenticatedUser, FileSystemRights.ReadPermissions, AccessControlType.Allow));
+
+                // Write ACL
                 dirInfo.SetAccessControl(dirACL);
 
                 Core.Util.Logger.LogDebug($"[CreateWriteOnlyDirectory] Granted Fullcontrol for Domain Administrators on {location}");

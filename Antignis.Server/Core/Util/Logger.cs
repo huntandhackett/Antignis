@@ -8,11 +8,21 @@ namespace Antignis.Server.Core.Util
         private static string logDirectory = System.IO.Path.Combine(appdataPath, "Antignis");
         private static string debugLog     = System.IO.Path.Combine(logDirectory, "Antignis.debug.log");
 
-
+        /// <summary>
+        /// Checks if logdirectory exists and will create it if not
+        /// </summary>
         internal static void CheckLogDir()
         {
             if (!System.IO.Directory.Exists(logDirectory))
                 System.IO.Directory.CreateDirectory(logDirectory);
+        }
+
+        /// <summary>
+        /// Rewrites the current line with the specified content 
+        /// </summary>
+        internal static void LogReplaceLine(string message)
+        {
+            Console.Write($"\r{message}");
         }
 
         /// <summary>

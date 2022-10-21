@@ -85,7 +85,7 @@ namespace Antignis.Server
 
             if (!ParseArguments(args))
             {
-                Console.WriteLine("\r\nPress a key to exit...");
+                Logger.Log("Press a key to exit...");
                 Console.ReadKey();
                 return;
             }
@@ -96,7 +96,7 @@ namespace Antignis.Server
                 // Stop running if any of the sanity checks fails
                 if (!SanityChecks())
                 {
-                    Console.WriteLine("\r\nPress a key to exit...");
+                    Logger.Log("Press a key to exit...");
                     Console.ReadKey();
                     return;
                 }
@@ -105,8 +105,7 @@ namespace Antignis.Server
                 if (ConfigureSaveLocation)
                 {
                     Core.Data.FS.CreateWriteOnlyDirectory(SaveLocation);
-                    Console.WriteLine("\r\nDirectory created and configured. Press a key to close the window");
-                    Console.ReadKey();
+                    Logger.Log("Directory created and configured");
                     return;
                 }
 
@@ -121,6 +120,8 @@ namespace Antignis.Server
                     Core.Util.Logger.LogDebug("Importing servers from AD");
                     Startup.ImportServersFromAD(ldapClient, dbClient);
                     Logger.Log("Servers imported");
+
+                    return;
                 }
 
                 // Import files from disk
@@ -129,6 +130,8 @@ namespace Antignis.Server
                     Core.Util.Logger.LogDebug("Importing data from: " + FilesDirectory);
                     List<Core.Models.Host> hosts = ImportDataFromDisk(FilesDirectory);
                     dbClient.AddHostRecord(hosts);
+                    Logger.Log("Files imported");
+                    return;
                 }
 
                 // Generate test data?
@@ -136,6 +139,8 @@ namespace Antignis.Server
                 {
                     Core.Util.Logger.LogDebug("Generating testdata...");
                     GenerateAndImportTestData();
+                    Logger.Log("Testdata created");
+                    return;
                 }
 
                 // Check if we need to create a baseline for workstations 
@@ -144,6 +149,8 @@ namespace Antignis.Server
                     // Create a baseline policy
                     Core.Util.Logger.LogDebug("Creating baseline for workstations...");
                     Startup.CreateFirewallBaseline(ldapClient, dbClient, false);
+                    Logger.Log("Firewall baseline for workstations created");
+                    return;
                 }
 
                 // Check if we need to create a baseline for workstations 
@@ -152,6 +159,8 @@ namespace Antignis.Server
                     // Create a baseline policy
                     Core.Util.Logger.LogDebug("Creating baseline for servers...");
                     Startup.CreateFirewallBaseline(ldapClient, dbClient, true);
+                    Logger.Log("Firewall baseline for servers created");
+                    return;
                 }
 
                 Core.Util.Logger.LogDebug("Starting GUI");
@@ -280,7 +289,7 @@ namespace Antignis.Server
             // Ask user to import AD stuff if the database is new
             if (dbClient.isNew && !ImportFromAD)
             {
-                Console.WriteLine("Do you want to ingest workstations and servers from Active Directory? (Y/n): ");
+                Logger.Log("Do you want to ingest workstations and servers from Active Directory? (Y/n): ");
                 string ans = Console.ReadLine();
 
                 ImportFromAD = ans.ToLower() == "y";
@@ -313,7 +322,7 @@ namespace Antignis.Server
 
                     if (!ans.ToLower().StartsWith("ou="))
                     {
-                        Console.WriteLine("Input should be a distinguishedName.\r\nThis article might be helpful:\r\n\thttps://support.xink.io/support/solutions/articles/1000246165-how-to-find-the-distinguishedname-of-an-ou-");
+                        Logger.Log("Input should be a distinguishedName.\r\nThis article might be helpful:\r\n\thttps://support.xink.io/support/solutions/articles/1000246165-how-to-find-the-distinguishedname-of-an-ou-");
                         return;
                     }
 
@@ -323,19 +332,19 @@ namespace Antignis.Server
             }
 
             // Generate the testdata
-            Console.WriteLine("\r\nGenerating and importing testdata. This might take a few minutes...");
+            Logger.Log("Generating and importing testdata. This might take a few minutes...");
             List<Core.Models.Host> hosts = Core.Data.Testdata.Examples.GetExampleData(ldapClient.domainFQDN);
             dbClient.AddHostRecords(hosts);
 
-            Console.WriteLine("Testdata has been generated and imported into the database.");
+            Logger.Log("Testdata has been generated and imported into the database.");
 
             if (importAD)
             {
-                Console.WriteLine("Importing objects into AD...");
+                Logger.Log("Importing objects into AD...");
                 ldapClient.CreateComputerObjects(hosts);
             }
 
-            Console.WriteLine("Done");
+            Logger.Log("Done");
 
         }
 
@@ -361,7 +370,11 @@ namespace Antignis.Server
                 }
                 catch
                 {
-                    Console.WriteLine("Could not parse file: " + file);
+                    Logger.Log("Could not parse file: " + file);
+                }
+                finally
+                {
+                    File.Delete(file);
                 }
             }
 
@@ -478,14 +491,14 @@ namespace Antignis.Server
                 }
 
                 // Unknown argument
-                Console.WriteLine("Unknown argument: " + argument);
+                Logger.Log("Unknown argument: " + argument);
                 return false;
             }
 
             // make sure all arguments make sense
             if (ImportFromDisk && string.IsNullOrEmpty(FilesDirectory))
             {
-                Console.WriteLine("Please specify directory containing the files to be imported");
+                Logger.Log("Please specify directory containing the files to be imported");
                 return false;
             }
 
@@ -495,14 +508,14 @@ namespace Antignis.Server
                 // Check if directory exists
                 if (!Directory.Exists(FilesDirectory))
                 {
-                    Console.WriteLine($"Directory does not exist: " + FilesDirectory);
+                    Logger.Log($"Directory does not exist: " + FilesDirectory);
                     return false;
                 }
 
                 // Check if directory contains json files
                 if (Directory.GetFiles(FilesDirectory, "*.json").Length == 0)
                 {
-                    Console.WriteLine($"Directory does not contain any input files: " + FilesDirectory);
+                    Logger.Log($"Directory does not contain any input files: " + FilesDirectory);
                     return false;
                 }
             }
@@ -510,7 +523,7 @@ namespace Antignis.Server
             // Check if database is stored on UNC location. SQLite does not support this.
             if (DatabaseLocation.StartsWith(@"\\"))
             {
-                Console.WriteLine("Database location on UNC network share is not supported. " +
+                Logger.Log("Database location on UNC network share is not supported. " +
                     "Either move Antignis to a local drive or specify the location on the harddrive where the database resides.");
                 return false;
             }

@@ -137,6 +137,7 @@ namespace Antignis.Client
                 // Help
                 if (argument == "h" || argument == "help" || argument == "?")
                 {
+                    ShowHelp();
                     return false;
                 }
 
@@ -147,6 +148,17 @@ namespace Antignis.Client
             }
 
             return result;
+        }
+    
+        /// <summary>
+        /// Displays help on the console
+        /// </summary>
+        private static void ShowHelp()
+        {
+            Console.WriteLine("");
+            Console.WriteLine("Usage:");
+            Console.WriteLine("\t--savelocation: <path>");
+            Console.WriteLine("\t--help: shows this information");
         }
     }
 }

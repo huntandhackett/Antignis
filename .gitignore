@@ -7,6 +7,7 @@
 /Antignis.Client/obj/Release
 /Antignis.Server/obj
 /Antignis.Server/testdata
+/Antignis.Client/obj
 /Antignis.Client/obj/Debug
 *.zip
 /Antignis.sln

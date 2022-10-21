@@ -1,3 +1,14 @@
+CREATE TABLE "WindowsFirewallSetting" (
+	"Id"	INTEGER NOT NULL UNIQUE,
+	"PrivateProfileEnabled"	INTEGER,
+	"PublicProfileEnabled"	INTEGER,
+	"DomainProfileEnabled"	INTEGER,
+	"PrivateProfileDefaultBlockAction"	TEXT,
+	"PublicProfileDefaultBlockAction"	TEXT,
+	"DomainProfileDefaultBlockAction"	TEXT,
+	PRIMARY KEY("Id" AUTOINCREMENT)
+);
+
 CREATE TABLE "Host" (
 	"Id"	INTEGER NOT NULL UNIQUE,
 	"IsServerOS"	INTEGER,
@@ -8,7 +19,6 @@ CREATE TABLE "Host" (
 	"WindowsFirewallSettingId"	INTEGER,
 	PRIMARY KEY("Id" AUTOINCREMENT)
 );
-
 CREATE TABLE "FileShare" (
 	"Id"	INTEGER NOT NULL UNIQUE,
 	"Name"	TEXT,
@@ -66,17 +76,6 @@ CREATE TABLE "WindowsFirewallRule" (
 	"Profiles"	TEXT,
 	"Name"	TEXT,
 	FOREIGN KEY("HostId") REFERENCES "Host"("Id"),
-	PRIMARY KEY("Id" AUTOINCREMENT)
-);
-
-CREATE TABLE "WindowsFirewallSetting" (
-	"Id"	INTEGER NOT NULL UNIQUE,
-	"PrivateProfileEnabled"	INTEGER,
-	"PublicProfileEnabled"	INTEGER,
-	"DomainProfileEnabled"	INTEGER,
-	"PrivateProfileDefaultBlockAction"	TEXT,
-	"PublicProfileDefaultBlockAction"	TEXT,
-	"DomainProfileDefaultBlockAction"	TEXT,
 	PRIMARY KEY("Id" AUTOINCREMENT)
 );
 

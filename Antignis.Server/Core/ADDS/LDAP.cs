@@ -448,7 +448,7 @@ namespace Antignis.Server.Core.ADDS
             SetLDAPPath(domainDistinguishedName);
 
             // Build the query
-            string query = $"(&(objectClass=computer)(operatingSystem=*Windows*)(!(operatingSystem=*server*)))";
+            string query = $"(&(objectClass=computer)(operatingSystem=*Windows*)(!(|(operatingSystem=*server*)(operatingSystem=*2000*))))";
             string[] properties = new string[] { "operatingSystem", "Name", "dNSHostName" };
 
             SearchResultCollection searchCol = Searcher(query, properties);
@@ -487,7 +487,7 @@ namespace Antignis.Server.Core.ADDS
             SetLDAPPath(domainDistinguishedName);
 
             // Build the query
-            string query = $"(&(objectClass=computer)(operatingSystem=*Windows*)((operatingSystem=*server*)))";
+            string query = $"(&(objectClass=computer)(operatingSystem=*Windows*)(|(operatingSystem=*server*)(operatingSystem=*2000*)))";
             string[] properties = new string[] { "operatingSystem", "Name", "dNSHostName" };
 
             SearchResultCollection searchCol = Searcher(query, properties);

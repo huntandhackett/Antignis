@@ -183,10 +183,17 @@ namespace Antignis.Server.Core.SQL
         /// </summary>
         public void AddHostRecord(List<Models.Host> hosts)
         {
+
+            var hostsCount   = hosts.Count;
+            var showProgress = hostsCount > 10;
+
+            if (showProgress)          
+                Util.Logger.Log($"Processing {hostsCount} records. This might take a while.");           
+
             using (DatabaseContext context = new DatabaseContext(dbLocation))
             {
                 foreach (Models.Host entity in hosts)
-                {
+                {     
                     try
                     {
                         // Check if entry exists
@@ -194,7 +201,7 @@ namespace Antignis.Server.Core.SQL
                         if (existing == null)
                         {
                             context.Host.Add(entity);
-                            //Console.WriteLine($"Added: {entity.DNSHostname}");
+                            context.SaveChanges();
                         }
                         else
                         {
@@ -414,7 +421,6 @@ namespace Antignis.Server.Core.SQL
                             if (context.ChangeTracker.HasChanges())
                                 context.SaveChanges();
 
-                            //Console.WriteLine($"Updated: {entity.DNSHostname}");
                         }
                     }
                     catch (Exception ex)
